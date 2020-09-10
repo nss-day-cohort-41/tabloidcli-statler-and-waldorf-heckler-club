@@ -9,16 +9,14 @@ namespace TabloidCLI
         {
 
             Console.WriteLine(@"╔════╗─╔╗─╔╗──────╔╦═══╦╗──╔══╗
-                                ║╔╗╔╗║─║║─║║──────║║╔═╗║║──╚╣╠╝
-                                ╚╝║║╠╩═╣╚═╣║╔══╦╦═╝║║─╚╣║───║║
-                                ──║║║╔╗║╔╗║║║╔╗╠╣╔╗║║─╔╣║─╔╗║║
-                                ──║║║╔╗║╚╝║╚╣╚╝║║╚╝║╚═╝║╚═╝╠╣╠╗
-                                ──╚╝╚╝╚╩══╩═╩══╩╩══╩═══╩═══╩══╝");
+║╔╗╔╗║─║║─║║──────║║╔═╗║║──╚╣╠╝
+╚╝║║╠╩═╣╚═╣║╔══╦╦═╝║║─╚╣║───║║
+──║║║╔╗║╔╗║║║╔╗╠╣╔╗║║─╔╣║─╔╗║║
+──║║║╔╗║╚╝║╚╣╚╝║║╚╝║╚═╝║╚═╝╠╣╠╗
+──╚╝╚╝╚╩══╩═╩══╩╩══╩═══╩═══╩══╝");
             Console.WriteLine("");
-
             Console.WriteLine("Welcome to TabloidCLI");
             Console.WriteLine("");
-
             // MainMenuManager implements the IUserInterfaceManager interface
             IUserInterfaceManager ui = new MainMenuManager();
             while (ui != null)
