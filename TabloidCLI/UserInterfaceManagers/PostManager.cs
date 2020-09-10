@@ -12,7 +12,7 @@ namespace TabloidCLI.UserInterfaceManagers
         private PostRepository _postRepository;
         private string _connectionString;
         private AuthorRepository _authorRepository;
-        private BlogRepository blogRepository;
+        private BlogRepository _blogRepository;
 
         public PostManager(IUserInterfaceManager parentUI, string connectionString)
         {
@@ -72,7 +72,7 @@ namespace TabloidCLI.UserInterfaceManagers
             List<Post> posts = _postRepository.GetAll();
             foreach (Post post in posts)
             {
-                Console.WriteLine(post);
+                Console.WriteLine($"Title: {post.Title} URL: {post.Url}");
             }
         }
 
@@ -126,16 +126,16 @@ namespace TabloidCLI.UserInterfaceManagers
             {
                 Console.WriteLine($"{author.Id}) {author.FullName}");
             }
-            post.Author = authors[int.Parse(Console.ReadLine())];
+            post.Author = authors[int.Parse(Console.ReadLine()) -1];
             Console.WriteLine("Choose a Blog to associate: ");
             List<Blog> blogs = _blogRepository.GetAll();
             foreach (Blog blog in blogs)
             {
                 Console.WriteLine($"{blog.Id}) {blog.Title}");
             }
-            post.Blog = blogs[int.Parse(Console.ReadLine())];
+            post.Blog = blogs[int.Parse(Console.ReadLine()) -1];
 
-
+            _postRepository.Insert(post);
 
 
         }
@@ -175,10 +175,10 @@ namespace TabloidCLI.UserInterfaceManagers
                 Console.WriteLine($"{author.Id}) {author.FullName}");
             }
             string authorValue = Console.ReadLine();
-            if (!string.IsNullOrWhiteSpace(publishDateTime))
+            if (!string.IsNullOrWhiteSpace(authorValue))
             {
                 
-            postToEdit.Author = authors[int.Parse(authorValue)];
+            postToEdit.Author = authors[int.Parse(authorValue) -1];
             }
             Console.WriteLine("Choose a new Blog to associate (blank to leave unchanged:");
             List<Blog> blogs = _blogRepository.GetAll();
@@ -187,10 +187,10 @@ namespace TabloidCLI.UserInterfaceManagers
                 Console.WriteLine($"{blog.Id}) {blog.Title}");
             }
             string blogValue = Console.ReadLine();
-            if (!string.IsNullOrWhiteSpace(publishDateTime))
+            if (!string.IsNullOrWhiteSpace(blogValue))
             {
 
-                postToEdit.Blog = blogs[int.Parse(blogValue)];
+                postToEdit.Blog = blogs[int.Parse(blogValue) -1];
             }
           
 
