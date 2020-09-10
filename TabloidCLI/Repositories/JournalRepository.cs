@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using Microsoft.Data.SqlClient;
+using TabloidCLI.Models;
+using TabloidCLI.Repositories;
 
 namespace TabloidCLI.Repositories
 {
-    class JournalRepository
+    class JournalRepository : DatabaseConnector, IRepository<Journal>
     {
     }
 }
