@@ -4,7 +4,7 @@ using System.Text;
 
 namespace TabloidCLI.Repositories
 {
-    class blogRepository
+    class BlogRepository
     {
     }
 }
