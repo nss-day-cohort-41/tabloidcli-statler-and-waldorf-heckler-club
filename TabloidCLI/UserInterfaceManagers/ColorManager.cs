@@ -33,36 +33,44 @@ namespace TabloidCLI.UserInterfaceManagers
             {
                 case "1":
                     Console.BackgroundColor = ConsoleColor.Cyan;
+                    Console.ForegroundColor = ConsoleColor.Black;
                     Console.Clear();
                     return this;
                 case "2":
                     Console.BackgroundColor = ConsoleColor.White;
+                    Console.ForegroundColor = ConsoleColor.Black;
                     Console.Clear();
                     return this;
                     
                     
                 case "3":
                     Console.BackgroundColor = ConsoleColor.Red;
+                    Console.ForegroundColor = ConsoleColor.White;
                     Console.Clear();
                     return this;
                 case "4":
                     Console.BackgroundColor = ConsoleColor.Black;
+                    Console.ForegroundColor = ConsoleColor.White;
                     Console.Clear();
                     return this;
                 case "5":
                     Console.BackgroundColor = ConsoleColor.Gray;
+                    Console.ForegroundColor = ConsoleColor.Black;
                     Console.Clear();
                     return this;
                 case "6":
                     Console.BackgroundColor = ConsoleColor.Green;
+                    Console.ForegroundColor = ConsoleColor.White;
                     Console.Clear();
                     return this;
                 case "7":
                     Console.BackgroundColor = ConsoleColor.Yellow;
+                    Console.ForegroundColor = ConsoleColor.Black;
                     Console.Clear();
                     return this;
                 case "8":
                     Console.BackgroundColor = ConsoleColor.Magenta;
+                    Console.ForegroundColor = ConsoleColor.White;
                     Console.Clear();
                     return this;
                 case "0":
