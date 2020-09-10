@@ -73,7 +73,7 @@ namespace TabloidCLI.UserInterfaceManagers
 
         private void Edit()
         {
-            Tag tagToEdit = Choose
+           // Tag tagToEdit = Choose
         }
 
         private void Remove()
