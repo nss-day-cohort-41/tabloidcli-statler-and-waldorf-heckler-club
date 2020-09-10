@@ -44,7 +44,7 @@ namespace TabloidCLI.UserInterfaceManagers
                     }
                     else
                     {
-                        return new BlogDetailManager(this, _connectionString, blog.Id);
+                       return new BlogDetailManager(this, _connectionString, blog.Id);
                     }
                 case "3":
                     Add();
@@ -59,6 +59,7 @@ namespace TabloidCLI.UserInterfaceManagers
                     return _parentUI;
                 default:
                     Console.WriteLine("Invalid Selection");
+                    return this;
             }
         }
 

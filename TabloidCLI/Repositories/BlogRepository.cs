@@ -105,7 +105,7 @@ namespace TabloidCLI
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"INSERT INTO Blog (Title, Url)
-                                        VALUES (@title, @url')";
+                                        VALUES (@title, @url)";
                     cmd.Parameters.AddWithValue("@title", blog.Title);
                     cmd.Parameters.AddWithValue("@url", blog.Url);
 
