@@ -11,21 +11,21 @@ namespace TabloidCLI.UserInterfaceManagers
         private AuthorRepository _authorRepository;
         private PostRepository _postRepository;
         private TagRepository _tagRepository;
-        private int _authorId;
+        private int _postId;
 
-        public PostDetailManager(IUserInterfaceManager parentUI, string connectionString, int authorId)
+        public PostDetailManager(IUserInterfaceManager parentUI, string connectionString, int postId)
         {
             _parentUI = parentUI;
             _authorRepository = new AuthorRepository(connectionString);
             _postRepository = new PostRepository(connectionString);
             _tagRepository = new TagRepository(connectionString);
-            _authorId = authorId;
+            _postId = postId;
         }
 
         public IUserInterfaceManager Execute()
         {
-            Author author = _authorRepository.Get(_authorId);
-            Console.WriteLine($"{author.FullName} Details");
+            Post post = _postRepository.Get(_postId);
+            Console.WriteLine($"{post.Title} Details");
             Console.WriteLine(" 1) View");
             Console.WriteLine(" 2) View Blog Posts");
             Console.WriteLine(" 3) Add Tag");
@@ -39,7 +39,7 @@ namespace TabloidCLI.UserInterfaceManagers
                 case "1":
                     View();
                     return this;
-                case "2":
+                /*case "2":
                     ViewBlogPosts();
                     return this;
                 case "3":
@@ -48,7 +48,7 @@ namespace TabloidCLI.UserInterfaceManagers
                 case "4":
                     RemoveTag();
                     return this;
-                case "0":
+               */ case "0":
                     return _parentUI;
                 default:
                     Console.WriteLine("Invalid Selection");
@@ -58,17 +58,20 @@ namespace TabloidCLI.UserInterfaceManagers
 
         private void View()
         {
-            Author author = _authorRepository.Get(_authorId);
-            Console.WriteLine($"Name: {author.FullName}");
-            Console.WriteLine($"Bio: {author.Bio}");
+            Post post = _postRepository.Get(_postId);
+            Console.WriteLine($"Title: {post.Title}");
+            Console.WriteLine($"URL: {post.Url}");
+            Console.WriteLine($"Published Date: {post.PublishDateTime}");
+            Console.WriteLine($"Author: {post.Author.FirstName} {post.Author.LastName}");
+            Console.WriteLine($"Blog: {post.Blog.Title}");
             Console.WriteLine("Tags:");
-            foreach (Tag tag in author.Tags)
+            foreach (Tag tag in post.Tags)
             {
                 Console.WriteLine(" " + tag);
             }
             Console.WriteLine();
         }
-
+        /*
         private void ViewBlogPosts()
         {
             List<Post> posts = _postRepository.GetByAuthor(_authorId);
@@ -131,6 +134,6 @@ namespace TabloidCLI.UserInterfaceManagers
             {
                 Console.WriteLine("Invalid Selection. Won't remove any tags.");
             }
-        }
+        } */
     }
 }
