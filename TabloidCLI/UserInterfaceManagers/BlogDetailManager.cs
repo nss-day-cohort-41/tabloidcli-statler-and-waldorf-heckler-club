@@ -40,7 +40,7 @@ namespace TabloidCLI.UserInterfaceManagers
                 case "1":
                     View();
                     return this;
-                /*
+                /* WILL ADD THESE BACK IN ONCE TAGS ARE UP AND RUNNING
                 case "2":
                     Console.WriteLine("Coming soon!");
                     return null;
