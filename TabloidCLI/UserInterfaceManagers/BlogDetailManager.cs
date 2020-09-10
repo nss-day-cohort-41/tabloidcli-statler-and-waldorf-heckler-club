@@ -40,6 +40,7 @@ namespace TabloidCLI.UserInterfaceManagers
                 case "1":
                     View();
                     return this;
+                /*
                 case "2":
                     Console.WriteLine("Coming soon!");
                     return null;
@@ -49,6 +50,7 @@ namespace TabloidCLI.UserInterfaceManagers
                 case "4":
                     Console.WriteLine("Coming soon!");
                     return null;
+                */
                 case "0":
                     return _parentUI;
                 default:
