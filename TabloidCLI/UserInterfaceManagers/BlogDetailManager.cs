@@ -47,7 +47,7 @@ namespace TabloidCLI.UserInterfaceManagers
                     RemoveTag();
                     return this;
                 case "4":
-                    //ViewPosts();
+                    ViewPosts();
                     return this;
                 case "0":
                     return _parentUI;
@@ -69,12 +69,17 @@ namespace TabloidCLI.UserInterfaceManagers
             }
             Console.WriteLine();
         }
-        /*
+        
         private void ViewPosts()
         {
-
+            List<Post> posts = _postRepository.GetByBlog(_blogId);
+            foreach (Post post in posts)
+            {
+                Console.WriteLine($"{post.Title} by {post.Author.FullName}");
+            }
+            Console.WriteLine();
         }
-        */
+        
 
       
         private void AddTag()
