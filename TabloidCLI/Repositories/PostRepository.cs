@@ -176,6 +176,45 @@ namespace TabloidCLI.Repositories
             }
         }
 
+        public List<Post> GetByBlog(int blogId)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"SELECT	p.Title, 
+		                                        a.FirstName,
+		                                        a.LastName
+                                           FROM Post p
+                                      LEFT JOIN Author a on p.AuthorId = a.id
+                                          WHERE BlogId = @blogId";
+                    cmd.Parameters.AddWithValue("blogId", blogId);
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    List<Post> posts = new List<Post>();
+                    while (reader.Read())
+                    {
+                        Post post = new Post()
+                        {
+                            Title = reader.GetString(reader.GetOrdinal("Title")),
+                            Author = new Author()
+                            {
+                                FirstName = reader.GetString(reader.GetOrdinal("FirstName")),
+                                LastName = reader.GetString(reader.GetOrdinal("LastName")),
+                            }
+                        };
+                        posts.Add(post);
+
+                    }
+                    reader.Close();
+
+                    return posts;
+
+                }
+            }
+        }
+
         public void Insert(Post post)
         {
             using (SqlConnection conn = Connection)

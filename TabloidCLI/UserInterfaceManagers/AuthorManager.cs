@@ -154,7 +154,13 @@ namespace TabloidCLI.UserInterfaceManagers
             Author authorToDelete = Choose("Which author would you like to remove?");
             if (authorToDelete != null)
             {
+                try {
                 _authorRepository.Delete(authorToDelete.Id);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Sorry, \"{authorToDelete}\" is currently in use and cannot be deleted.");
+                }
             }
         }
     }

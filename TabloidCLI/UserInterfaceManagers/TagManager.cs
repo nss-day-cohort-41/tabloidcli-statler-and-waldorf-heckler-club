@@ -126,7 +126,14 @@ namespace TabloidCLI.UserInterfaceManagers
             Tag tagToDelete = Choose("Which tag would you like to remove?");
             if (tagToDelete != null)
             {
-                _tagRepository.Delete(tagToDelete.Id);
+                try
+                {
+                    _tagRepository.Delete(tagToDelete.Id);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Sorry, \"{tagToDelete}\" is currently in use!");
+                }
             }
         }
     }
