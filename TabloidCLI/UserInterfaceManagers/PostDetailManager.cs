@@ -11,11 +11,13 @@ namespace TabloidCLI.UserInterfaceManagers
         private AuthorRepository _authorRepository;
         private PostRepository _postRepository;
         private TagRepository _tagRepository;
+        private string _connectionString;
         private int _postId;
 
         public PostDetailManager(IUserInterfaceManager parentUI, string connectionString, int postId)
         {
             _parentUI = parentUI;
+            _connectionString = connectionString;
             _authorRepository = new AuthorRepository(connectionString);
             _postRepository = new PostRepository(connectionString);
             _tagRepository = new TagRepository(connectionString);
@@ -27,7 +29,7 @@ namespace TabloidCLI.UserInterfaceManagers
             Post post = _postRepository.Get(_postId);
             Console.WriteLine($"{post.Title} Details");
             Console.WriteLine(" 1) View");
-            Console.WriteLine(" 2) View Blog Posts");
+            Console.WriteLine(" 2) Note Manager");
             Console.WriteLine(" 3) Add Tag");
             Console.WriteLine(" 4) Remove Tag");
             Console.WriteLine(" 0) Go Back");
@@ -39,16 +41,16 @@ namespace TabloidCLI.UserInterfaceManagers
                 case "1":
                     View();
                     return this;
-                /*case "2":
-                    ViewBlogPosts();
-                    return this;
+                case "2":
+                    
+                    return new NoteManager(this, _connectionString, _postId);
                 case "3":
                     AddTag();
                     return this;
                 case "4":
                     RemoveTag();
                     return this;
-               */ case "0":
+                case "0":
                     return _parentUI;
                 default:
                     Console.WriteLine("Invalid Selection");
@@ -71,22 +73,14 @@ namespace TabloidCLI.UserInterfaceManagers
             }
             Console.WriteLine();
         }
-        /*
-        private void ViewBlogPosts()
-        {
-            List<Post> posts = _postRepository.GetByAuthor(_authorId);
-            foreach (Post post in posts)
-            {
-                Console.WriteLine(post);
-            }
-            Console.WriteLine();
-        }
+        
+        
 
         private void AddTag()
         {
-            Author author = _authorRepository.Get(_authorId);
+            Post post = _postRepository.Get(_postId);
 
-            Console.WriteLine($"Which tag would you like to add to {author.FullName}?");
+            Console.WriteLine($"Which tag would you like to add to {post.Title}?");
             List<Tag> tags = _tagRepository.GetAll();
 
             for (int i = 0; i < tags.Count; i++)
@@ -101,7 +95,7 @@ namespace TabloidCLI.UserInterfaceManagers
             {
                 int choice = int.Parse(input);
                 Tag tag = tags[choice - 1];
-                _authorRepository.InsertTag(author, tag);
+                _postRepository.InsertTag(post, tag);
             }
             catch (Exception ex)
             {
@@ -111,10 +105,10 @@ namespace TabloidCLI.UserInterfaceManagers
 
         private void RemoveTag()
         {
-            Author author = _authorRepository.Get(_authorId);
+            Post post = _postRepository.Get(_postId);
 
-            Console.WriteLine($"Which tag would you like to remove from {author.FullName}?");
-            List<Tag> tags = author.Tags;
+            Console.WriteLine($"Which tag would you like to remove from {post.Title}?");
+            List<Tag> tags = post.Tags;
 
             for (int i = 0; i < tags.Count; i++)
             {
@@ -128,12 +122,12 @@ namespace TabloidCLI.UserInterfaceManagers
             {
                 int choice = int.Parse(input);
                 Tag tag = tags[choice - 1];
-                _authorRepository.DeleteTag(author.Id, tag.Id);
+                _postRepository.DeleteTag(post.Id, tag.Id);
             }
             catch (Exception ex)
             {
                 Console.WriteLine("Invalid Selection. Won't remove any tags.");
             }
-        } */
+        }
     }
 }
