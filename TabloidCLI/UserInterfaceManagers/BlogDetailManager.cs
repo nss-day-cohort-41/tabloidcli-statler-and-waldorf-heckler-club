@@ -28,9 +28,9 @@ namespace TabloidCLI.UserInterfaceManagers
             Blog blog = _blogRepository.Get(_blogId);
             Console.WriteLine($"{blog.Title} Details");
             Console.WriteLine(" 1) View");
-            Console.WriteLine(" 2) Add Tag (coming soon)");
-            Console.WriteLine(" 3) Remove Tag (coming a little later)");
-            Console.WriteLine(" 4) View Posts (coming a little later still)");
+            Console.WriteLine(" 2) Add Tag");
+            Console.WriteLine(" 3) Remove Tag");
+            Console.WriteLine(" 4) View Posts");
             Console.WriteLine(" 0) Go Back");
 
             Console.WriteLine("> ");
@@ -40,17 +40,27 @@ namespace TabloidCLI.UserInterfaceManagers
                 case "1":
                     View();
                     return this;
-                /* WILL ADD THESE BACK IN ONCE TAGS ARE UP AND RUNNING
                 case "2":
-                    Console.WriteLine("Coming soon!");
-                    return null;
+                    Console.WriteLine("Feature coming soon!");
+                    return this;
+                /*ADDED IN FUTURE TICKET
+                            AddTag();
+                            return this;
+                            */
                 case "3":
-                    Console.WriteLine("Coming soon!");
-                    return null;
+                    Console.WriteLine("Feature coming soon!");
+                    return this;
+                /*ADDED IN FUTURE TICKET
+                            RemoveTag();
+                            return this;
+                            */
                 case "4":
-                    Console.WriteLine("Coming soon!");
-                    return null;
-                */
+                    Console.WriteLine("Feature coming soon!");
+                    return this;
+                /*ADDED IN FUTURE TICKET
+                            ViewPosts();
+                            return this;
+                    */
                 case "0":
                     return _parentUI;
                 default:
@@ -64,12 +74,75 @@ namespace TabloidCLI.UserInterfaceManagers
             Blog blog = _blogRepository.Get(_blogId);
             Console.WriteLine($"Title: {blog.Title}");
             Console.WriteLine($"Url: {blog.Url}");
-            /*Console.WriteLine("Tags:");
+            Console.WriteLine("Tags:");
             foreach (Tag tag in blog.Tags)
             {
                 Console.WriteLine(" " + tag);
             }
-            Console.WriteLine();*/
+            Console.WriteLine();
         }
+
+        /*ADDED IN FUTURE TICKET
+
+        private void ViewPosts()
+        {
+
+        }
+        */
+
+
+        /*ADDED IN FUTURE TICKET
+        private void AddTag()
+        {
+            Blog blog = _blogRepository.Get(_blogId);
+
+            Console.WriteLine($"Which tag would you like to add to {blog.Title}?");
+            List<Tag> tags = _tagRepository.GetAll();
+
+            for (int i = 0; i < tags.Count; i++)
+            {
+                Tag tag = tags[i];
+                Console.WriteLine($"{i + 1}) {tag.Name}");
+            }
+            Console.Write("> ");
+
+            string input = Console.ReadLine();
+            try
+            {
+                int choice = int.Parse(input);
+                Tag tag = tags[choice - 1];
+                _blogRepository.InsertTag(blog, tag);
+            }
+        }
+        */
+
+        /*ADDED IN FUTURE TICKET
+        private void RemoveTag()
+        {
+            Blog blog = _blogRepository.Get(_blogId);
+
+            Console.WriteLine($"Which tag would you like to remove from {blog.Title}?");
+            List<Tag> tags = blog.Tags;
+
+            for (int i = 0; i < tags.Count; i++)
+            {
+                Tag tag = tags[i];
+                Console.WriteLine($"{i + 1}) {tag.Name}");
+            }
+            Console.Write("> ");
+
+            string input = Console.ReadLine();
+            try
+            {
+                int choice = int.Parse(input);
+                Tag tag = tags[choice - 1];
+                _blogRepository.DeleteTag(blog.Id, tag.Id);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Invalid selection. Won't remove any tags.");
+            }
+        }
+        */
     }
 }
