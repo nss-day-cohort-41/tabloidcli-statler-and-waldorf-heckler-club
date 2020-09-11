@@ -72,7 +72,10 @@ namespace TabloidCLI.UserInterfaceManagers
         
         private void ViewPosts()
         {
+            Blog blog = _blogRepository.Get(_blogId);
             List<Post> posts = _postRepository.GetByBlog(_blogId);
+            Console.WriteLine();
+            Console.WriteLine($"All posts from \"{blog.Title}\"");
             foreach (Post post in posts)
             {
                 Console.WriteLine($"{post.Title} by {post.Author.FullName}");
