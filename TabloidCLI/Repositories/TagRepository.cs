@@ -119,6 +119,7 @@ namespace TabloidCLI
             }
         }
 
+        /*
         public SearchResults<Author> SearchAuthors(string tagName)
         {
             using (SqlConnection conn = Connection)
@@ -156,5 +157,6 @@ namespace TabloidCLI
                 }
             }
         }
+        */
     }
 }
