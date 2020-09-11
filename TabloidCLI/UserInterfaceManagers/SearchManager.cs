@@ -57,7 +57,7 @@ namespace TabloidCLI.UserInterfaceManagers
         {
             string tagName;
             Console.Clear();
-            Console.WriteLine("(Hit enter to see a list of know tags)");
+            Console.WriteLine("(Hit enter to see a list of known tags)");
 
             do
             {
@@ -90,7 +90,7 @@ namespace TabloidCLI.UserInterfaceManagers
         {
             string tagName;
             Console.Clear();
-            Console.WriteLine("(Hit enter to see a list of know tags)");
+            Console.WriteLine("(Hit enter to see a list of known tags)");
 
             do {
                 Console.WriteLine("Search Authors by ");
@@ -127,7 +127,7 @@ namespace TabloidCLI.UserInterfaceManagers
         {
             string tagName;
             Console.Clear();
-            Console.WriteLine("(Hit enter to see a list of know tags)");
+            Console.WriteLine("(Hit enter to see a list of known tags)");
 
             do
             {
@@ -165,7 +165,7 @@ namespace TabloidCLI.UserInterfaceManagers
         {
             string tagName;
             Console.Clear();
-            Console.WriteLine("(Hit enter to see a list of know tags)");
+            Console.WriteLine("(Hit enter to see a list of known tags)");
 
             do
             {
