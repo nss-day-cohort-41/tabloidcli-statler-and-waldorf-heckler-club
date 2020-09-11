@@ -56,7 +56,7 @@ namespace TabloidCLI.Repositories
                 conn.Open();
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"SELECT Id, Title, URL FROM Blog b
+                    cmd.CommandText = @"SELECT b.Id, b.Title, b.URL FROM Blog b
                                             Left Join BlogTag bt ON bt.BlogId = b.Id
                                             Left Join Tag t on bt.TagId = t.Id
                                          WHERE t.Name LIKE @name";
@@ -90,8 +90,9 @@ namespace TabloidCLI.Repositories
                 conn.Open();
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"SELECT Id, Title, URL, PublishDateTime FROM Post p
-                                            Left Join Tag t On t.Id = p.TagId
+                    cmd.CommandText = @"SELECT p.Id, p.Title, p.URL, p.PublishDateTime FROM Post p
+                                            Left Join PostTag pt On p.Id = pt.PostId
+                                            Left Join Tag t On t.Id = pt.TagId
                                          WHERE t.Name LIKE @name";
                     cmd.Parameters.AddWithValue("@name", $"%{tagName}%");
                     SqlDataReader reader = cmd.ExecuteReader();

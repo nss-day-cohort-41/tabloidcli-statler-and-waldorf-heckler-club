@@ -196,7 +196,7 @@ namespace TabloidCLI.UserInterfaceManagers
             }
             else
             {
-                Console.WriteLine("Search results found in blogs:");
+                Console.WriteLine($"'{tagName}' found in blogs");
                 blogResults.Display();
             }
 
@@ -210,6 +210,7 @@ namespace TabloidCLI.UserInterfaceManagers
             }
             else
             {
+                Console.WriteLine($"'{tagName}' found in authors");
                 authorResults.Display();
             }
 
@@ -222,8 +223,8 @@ namespace TabloidCLI.UserInterfaceManagers
             }
             else
             {
-                Console.WriteLine();
-                Console.WriteLine("Search results found in posts:");
+                
+                Console.WriteLine($"'{tagName}' found in posts");
                 postResults.Display();
             }
         }
