@@ -77,7 +77,7 @@ namespace TabloidCLI
                                 Id = reader.GetInt32(reader.GetOrdinal("AuthorId")),
                                 FirstName = reader.GetString(reader.GetOrdinal("FirstName")),
                                 LastName = reader.GetString(reader.GetOrdinal("LastName")),
-                                Bio = reader.GetString(reader.GetOrdinal("Bio")),
+                                Bio = reader.GetString(reader.GetOrdinal("Bio"))
                             };
                         }
 
@@ -86,7 +86,7 @@ namespace TabloidCLI
                             author.Tags.Add(new Tag()
                             {
                                 Id = reader.GetInt32(reader.GetOrdinal("TagId")),
-                                Name = reader.GetString(reader.GetOrdinal("Name")),
+                                Name = reader.GetString(reader.GetOrdinal("Name"))
                             });
                         }
                     }
