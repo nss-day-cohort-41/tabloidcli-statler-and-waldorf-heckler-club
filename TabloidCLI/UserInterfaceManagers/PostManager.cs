@@ -201,7 +201,7 @@ namespace TabloidCLI.UserInterfaceManagers
         {
 
            
-            Post postToDelete = Choose("Which author would you like to remove?");
+            Post postToDelete = Choose("Which post would you like to remove?");
             if (postToDelete != null)
             {
                 _postRepository.Delete(postToDelete.Id);
