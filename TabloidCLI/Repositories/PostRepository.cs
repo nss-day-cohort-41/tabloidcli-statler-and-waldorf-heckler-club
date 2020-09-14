@@ -22,7 +22,8 @@ namespace TabloidCLI.Repositories
                                                PublishDateTime,
                                                AuthorId,
                                                BlogId
-                                          FROM Post";
+                                          FROM Post
+                                            WHERE IdDeleted = 0";
 
                     List<Post> posts = new List<Post>();
 
@@ -222,8 +223,8 @@ namespace TabloidCLI.Repositories
                 conn.Open();
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"INSERT INTO Post (Title, URL, PublishDateTime, AuthorId, BlogId )
-                                                     VALUES (@title, @uRL, @publishDateTime, @authorId, @blogId)";
+                    cmd.CommandText = @"INSERT INTO Post (Title, URL, PublishDateTime, AuthorId, BlogId, IdDeleted )
+                                                     VALUES (@title, @uRL, @publishDateTime, @authorId, @blogId, 0)";
                     cmd.Parameters.AddWithValue("@title", post.Title);
                     cmd.Parameters.AddWithValue("@uRL", post.Url);
                     cmd.Parameters.AddWithValue("@publishDateTime", post.PublishDateTime);
@@ -262,6 +263,24 @@ namespace TabloidCLI.Repositories
             }
         }
 
+        /*       public void Delete(int id)
+               {
+                   using (SqlConnection conn = Connection)
+                   {
+                       conn.Open();
+                       using (SqlCommand cmd = conn.CreateCommand())
+                       {
+                           cmd.CommandText = @"DELETE FROM Post 
+                                                WHERE Id = @id";
+                           cmd.Parameters.AddWithValue("@Id", id);
+
+
+                           cmd.ExecuteNonQuery();
+                       }
+                   }
+               }*/
+
+        //Soft Delete
         public void Delete(int id)
         {
             using (SqlConnection conn = Connection)
@@ -269,10 +288,13 @@ namespace TabloidCLI.Repositories
                 conn.Open();
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"DELETE FROM Post 
-                                         WHERE Id = @id";
-                    cmd.Parameters.AddWithValue("@Id", id);
-                    
+                    cmd.CommandText = @"UPDATE Post 
+                                           SET IdDeleted = @IdDeleted
+
+                                         WHERE id = @id";
+
+                    cmd.Parameters.AddWithValue("@IdDeleted", 1);
+                    cmd.Parameters.AddWithValue("@id", id);
 
                     cmd.ExecuteNonQuery();
                 }

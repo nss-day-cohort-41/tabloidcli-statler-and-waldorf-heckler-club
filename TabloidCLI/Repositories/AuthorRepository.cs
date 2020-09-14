@@ -21,7 +21,8 @@ namespace TabloidCLI
                                                FirstName,
                                                LastName,
                                                Bio
-                                          FROM Author";
+                                          FROM Author
+                                            WHERE IdDeleted = 0";
 
                     List<Author> authors = new List<Author>();
 
@@ -105,8 +106,9 @@ namespace TabloidCLI
                 conn.Open();
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"INSERT INTO Author (FirstName, LastName, Bio )
-                                                     VALUES (@firstName, @lastName, @bio)";
+                    cmd.CommandText = @"INSERT INTO Author (FirstName, LastName, Bio, IdDeleted )
+
+                                                     VALUES (@firstName, @lastName, @bio, 0)";
                     cmd.Parameters.AddWithValue("@firstName", author.FirstName);
                     cmd.Parameters.AddWithValue("@lastName", author.LastName);
                     cmd.Parameters.AddWithValue("@bio", author.Bio);
@@ -139,6 +141,7 @@ namespace TabloidCLI
             }
         }
 
+        /* Hard Delete
         public void Delete(int id)
         {
             using (SqlConnection conn = Connection)
@@ -153,7 +156,28 @@ namespace TabloidCLI
                 }
             }
         }
+        */
 
+        //Soft Delete
+        public void Delete(int id)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"UPDATE Author 
+                                           SET IdDeleted = @IdDeleted
+
+                                         WHERE id = @id";
+
+                    cmd.Parameters.AddWithValue("@IdDeleted", 1);
+                    cmd.Parameters.AddWithValue("@id", id);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
         public void InsertTag(Author author, Tag tag)
         {
             using (SqlConnection conn = Connection)
