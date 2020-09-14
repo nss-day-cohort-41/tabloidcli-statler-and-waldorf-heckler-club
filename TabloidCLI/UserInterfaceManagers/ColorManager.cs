@@ -16,6 +16,7 @@ namespace TabloidCLI.UserInterfaceManagers
         }
             public IUserInterfaceManager Execute()
         {
+            Console.Clear();
             Console.WriteLine("Background Color Menu");
             Console.WriteLine(" 1) Blue");
             Console.WriteLine(" 2) White");
@@ -74,6 +75,7 @@ namespace TabloidCLI.UserInterfaceManagers
                     Console.Clear();
                     return this;
                 case "0":
+                    Console.Clear();
                     return _parentUI;
                 default:
                     Console.WriteLine("Invalid Selection");

@@ -18,7 +18,8 @@ namespace TabloidCLI
                 conn.Open();
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"SELECT id, Name FROM Tag";
+                    cmd.CommandText = @"SELECT id, Name FROM Tag
+                                        WHERE IdDeleted = 0";
                     List<Tag> tags = new List<Tag>();
 
                     SqlDataReader reader = cmd.ExecuteReader();
@@ -78,7 +79,7 @@ namespace TabloidCLI
                 conn.Open();
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = "INSERT INTO Tag (Name) VALUES (@name)";
+                    cmd.CommandText = "INSERT INTO Tag (Name, IdDeleted) VALUES (@name, 0)";
                     cmd.Parameters.AddWithValue("@name", tag.Name);
 
                     cmd.ExecuteNonQuery();
@@ -103,7 +104,23 @@ namespace TabloidCLI
                 }
             }
         }
+        //Hard Delete
+        /*       public void Delete(int id)
+               {
+                   using (SqlConnection conn = Connection)
+                   {
+                       conn.Open();
+                       using (SqlCommand cmd = conn.CreateCommand())
+                       {
+                           cmd.CommandText = "DELETE FROM Tag WHERE id = @id";
+                           cmd.Parameters.AddWithValue("@id", id);
 
+                           cmd.ExecuteNonQuery();
+                       }
+                   }
+               }*/
+
+        //Soft Delete
         public void Delete(int id)
         {
             using (SqlConnection conn = Connection)
@@ -111,7 +128,12 @@ namespace TabloidCLI
                 conn.Open();
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = "DELETE FROM Tag WHERE id = @id";
+                    cmd.CommandText = @"UPDATE Tag 
+                                           SET IdDeleted = @IdDeleted
+
+                                         WHERE id = @id";
+
+                    cmd.Parameters.AddWithValue("@IdDeleted", 1);
                     cmd.Parameters.AddWithValue("@id", id);
 
                     cmd.ExecuteNonQuery();

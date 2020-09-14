@@ -29,6 +29,7 @@ namespace TabloidCLI.UserInterfaceManagers
 
         public IUserInterfaceManager Execute()
         {
+            Console.Clear();
             Console.WriteLine("Notes Menu");
             Console.WriteLine(" 1) List Notes");
             Console.WriteLine(" 2) Add Note");
@@ -49,6 +50,7 @@ namespace TabloidCLI.UserInterfaceManagers
                     Remove();
                     return this;
                 case "0":
+                    Console.Clear();
                     return _parentUI;
                 default:
                     Console.WriteLine("Invalid Selection");

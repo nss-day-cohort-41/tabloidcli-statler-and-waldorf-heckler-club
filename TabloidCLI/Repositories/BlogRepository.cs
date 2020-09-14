@@ -22,7 +22,8 @@ namespace TabloidCLI
                     cmd.CommandText = @"SELECT id,
 	                                           Title,
 	                                           Url
-                                          FROM Blog";
+                                          FROM Blog
+                                            WHERE IdDeleted = 0";
 
                     List<Blog> blogs = new List<Blog>();
 
@@ -104,8 +105,8 @@ namespace TabloidCLI
                 conn.Open();
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"INSERT INTO Blog (Title, Url)
-                                        VALUES (@title, @url)";
+                    cmd.CommandText = @"INSERT INTO Blog (Title, Url, IdDeleted)
+                                        VALUES (@title, @url, 0)";
                     cmd.Parameters.AddWithValue("@title", blog.Title);
                     cmd.Parameters.AddWithValue("@url", blog.Url);
 
@@ -134,7 +135,23 @@ namespace TabloidCLI
                 }
             }
         }
+        //Hard Delete
+        /*        public void Delete(int id)
+                {
+                    using (SqlConnection conn = Connection)
+                    {
+                        conn.Open();
+                        using (SqlCommand cmd = conn.CreateCommand())
+                        {
+                            cmd.CommandText = @"DELETE FROM Blog WHERE id = @id";
+                            cmd.Parameters.AddWithValue("@id", id);
 
+                            cmd.ExecuteNonQuery();
+                        }
+                    }
+                }*/
+
+        //Soft Delete
         public void Delete(int id)
         {
             using (SqlConnection conn = Connection)
@@ -142,7 +159,12 @@ namespace TabloidCLI
                 conn.Open();
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"DELETE FROM Blog WHERE id = @id";
+                    cmd.CommandText = @"UPDATE Blog 
+                                           SET IdDeleted = @IdDeleted
+
+                                         WHERE id = @id";
+
+                    cmd.Parameters.AddWithValue("@IdDeleted", 1);
                     cmd.Parameters.AddWithValue("@id", id);
 
                     cmd.ExecuteNonQuery();
