@@ -21,7 +21,7 @@ namespace TabloidCLI.UserInterfaceManagers
 
         public IUserInterfaceManager Execute()
         {
-            Console.Clear();
+            
             Console.WriteLine("Blog Menu");
             Console.WriteLine(" 1) List Blogs");
             Console.WriteLine(" 2) Blog Details");
@@ -107,12 +107,15 @@ namespace TabloidCLI.UserInterfaceManagers
         private void Add()
         {
             Console.WriteLine("New Blog");
+           
             Blog blog = new Blog();
 
             Console.WriteLine("Title: ");
+            Console.Write("> ");
             blog.Title = Console.ReadLine();
 
             Console.WriteLine("URL: ");
+            Console.Write("> ");
             blog.Url = Console.ReadLine();
 
             _blogRepository.Insert(blog);

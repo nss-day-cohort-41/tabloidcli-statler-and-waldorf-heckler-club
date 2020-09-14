@@ -25,7 +25,7 @@ namespace TabloidCLI.UserInterfaceManagers
 
         public IUserInterfaceManager Execute()
         {
-            Console.Clear();
+           
             Console.WriteLine("Post Menu");
             Console.WriteLine(" 1) List Posts");
             Console.WriteLine(" 2) Post Details");
@@ -111,17 +111,28 @@ namespace TabloidCLI.UserInterfaceManagers
 
         private void Add()
         {
+            string response;
+            DateTime success;
             Console.WriteLine("New Post");
             Post post = new Post();
 
-            Console.Write("Title: ");
+            Console.WriteLine("Title: ");
+            Console.Write("> ");
             post.Title = Console.ReadLine();
 
-            Console.Write("URL: ");
+            Console.WriteLine("URL: ");
+            Console.Write("> ");
             post.Url = Console.ReadLine();
+            do
+            {
+                Console.WriteLine("Date Published (yyyy,mm,dd): ");
+                Console.Write("> ");
 
-            Console.Write("PublishDateTime: ");
-            post.PublishDateTime = DateTime.Parse(Console.ReadLine());
+                response = Console.ReadLine();
+            } while (!DateTime.TryParse(response, out success));
+            post.PublishDateTime = success;
+
+            
             Console.WriteLine("Choose a Author to associate: ");
             List<Author> authors = _authorRepository.GetAll();
             foreach (Author author in authors)
