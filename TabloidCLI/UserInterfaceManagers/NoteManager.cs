@@ -29,7 +29,7 @@ namespace TabloidCLI.UserInterfaceManagers
 
         public IUserInterfaceManager Execute()
         {
-            Console.Clear();
+         
             Console.WriteLine("Notes Menu");
             Console.WriteLine(" 1) List Notes");
             Console.WriteLine(" 2) Add Note");
@@ -107,10 +107,12 @@ namespace TabloidCLI.UserInterfaceManagers
             Console.WriteLine("New Note");
             Note note = new Note();
 
-            Console.Write("Title: ");
+            Console.WriteLine("Title: ");
+            Console.Write("> ");
             note.Title = Console.ReadLine();
 
-            Console.Write("Content: ");
+            Console.WriteLine("Content: ");
+            Console.Write("> ");
             note.Content = Console.ReadLine();
 
 
