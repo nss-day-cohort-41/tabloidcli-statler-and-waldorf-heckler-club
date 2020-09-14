@@ -191,7 +191,7 @@ namespace TabloidCLI.Repositories
                                            FROM Post p
                                       LEFT JOIN Author a on p.AuthorId = a.id
                                           WHERE BlogId = @blogId AND    
-                                            a.IdDeleted = 0";
+                                            p.IdDeleted = 0";
                     cmd.Parameters.AddWithValue("blogId", blogId);
                     SqlDataReader reader = cmd.ExecuteReader();
 
