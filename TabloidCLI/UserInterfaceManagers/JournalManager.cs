@@ -78,7 +78,7 @@ namespace TabloidCLI.UserInterfaceManagers
                     Console.WriteLine();
                     Console.WriteLine(allJournalEntries[counter].Content);
                     Console.WriteLine("---------------------------");
-                    Console.WriteLine("Press the up or down arrow or press escape to exit");
+                    Console.WriteLine("Press the up or down arrow or press enter to exit");
                     entryKey = Console.ReadKey();
                     Console.Clear();
                     if (entryKey.Key == ConsoleKey.UpArrow)
@@ -102,16 +102,16 @@ namespace TabloidCLI.UserInterfaceManagers
                         {
                             counter++;
                         }
-                    }/*else if(entryKey.Key == ConsoleKey.Escape)
+                    }else if(entryKey.Key == ConsoleKey.Enter)
                 {
                     break;
-                }*/
+                }
                     else
                     {
                         Console.WriteLine("Invalid key.");
                     }
                 
-            } while (entryKey.Key != ConsoleKey.Escape);
+            } while (entryKey.Key != ConsoleKey.Enter);
             }
             catch (Exception ex)
             {
