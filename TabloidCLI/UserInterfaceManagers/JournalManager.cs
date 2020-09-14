@@ -19,7 +19,7 @@ namespace TabloidCLI.UserInterfaceManagers
 
         public IUserInterfaceManager Execute()
         {
-            Console.Clear();
+           
             Console.WriteLine("Journal Menu");
             Console.WriteLine(" 1) List Journal Entries");
             Console.WriteLine(" 2) Add New Journal Entry");
@@ -56,24 +56,68 @@ namespace TabloidCLI.UserInterfaceManagers
         {
             List<Journal> allJournalEntries = _journalRepository.GetAll();
             Console.Clear();
-            foreach (Journal entry in allJournalEntries)
+            ConsoleKeyInfo entryKey;
+
+            int counter = 0;
+            try
             {
-                string tab = "\t\t\t";
-                if (entry.Title.Length > 16 && entry.Title.Length < 24)
+                do
+            {
+               
+                    string tab = "\t\t\t";
+                    if (allJournalEntries[counter].Title.Length > 16 && allJournalEntries[counter].Title.Length < 24)
+                    {
+                        tab = "\t\t";
+                    }
+                    else if (allJournalEntries[counter].Title.Length > 24)
+                    {
+                        tab = "\t";
+                    }
+
+                    Console.WriteLine($"{allJournalEntries[counter].Title}{tab}{allJournalEntries[counter].CreateDateTime}");
+                    Console.WriteLine();
+                    Console.WriteLine(allJournalEntries[counter].Content);
+                    Console.WriteLine("---------------------------");
+                    Console.WriteLine("Press the up or down arrow or press escape to exit");
+                    entryKey = Console.ReadKey();
+                    Console.Clear();
+                    if (entryKey.Key == ConsoleKey.UpArrow)
+                    {
+                        if (counter == 0)
+                        {
+                            counter = allJournalEntries.Count - 1;
+                        }
+                        else
+                        {
+                            counter--;
+                        }
+                    }
+                    else if (entryKey.Key == ConsoleKey.DownArrow)
+                    {
+                        if (counter == allJournalEntries.Count - 1)
+                        {
+                            counter = 0;
+                        }
+                        else
+                        {
+                            counter++;
+                        }
+                    }/*else if(entryKey.Key == ConsoleKey.Escape)
                 {
-                    tab = "\t\t";
-                }
-                else if (entry.Title.Length > 24)
-                {
-                    tab = "\t";
-                }
-                    Console.WriteLine($"{entry.Title}{tab}{entry.CreateDateTime}");
-                Console.WriteLine();
-                Console.WriteLine(entry.Content); 
-                Console.WriteLine("---------------------------");
+                    break;
+                }*/
+                    else
+                    {
+                        Console.WriteLine("Invalid key.");
+                    }
+                
+            } while (entryKey.Key != ConsoleKey.Escape);
             }
-            Console.WriteLine("Press any key to continue.");
-            Console.ReadKey();
+            catch (Exception ex)
+            {
+                Console.WriteLine("No entries found.");
+
+            }
         }
 
         private void Add()
