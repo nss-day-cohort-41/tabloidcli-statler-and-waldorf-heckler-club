@@ -19,10 +19,9 @@ namespace TabloidCLI.UserInterfaceManagers
             Console.WriteLine(" 6) Search by Tag");
             Console.WriteLine(" 7) Background Color");
             Console.WriteLine(" 0) Exit");
+
             Console.Write("> ");
-            
             string choice = Console.ReadLine();
-          
             switch (choice)
             {
                 case "1": return new JournalManager(this, CONNECTION_STRING);

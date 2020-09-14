@@ -140,7 +140,8 @@ namespace TabloidCLI.Repositories
                                           FROM Post p 
                                                LEFT JOIN Author a on p.AuthorId = a.Id
                                                LEFT JOIN Blog b on p.BlogId = b.Id 
-                                         WHERE p.AuthorId = @authorId";
+                                         WHERE p.AuthorId = @authorId AND    
+                                            p.IdDeleted = 0";
                     cmd.Parameters.AddWithValue("@authorId", authorId);
                     SqlDataReader reader = cmd.ExecuteReader();
 
@@ -189,7 +190,8 @@ namespace TabloidCLI.Repositories
 		                                        a.LastName
                                            FROM Post p
                                       LEFT JOIN Author a on p.AuthorId = a.id
-                                          WHERE BlogId = @blogId";
+                                          WHERE BlogId = @blogId AND    
+                                            a.IdDeleted = 0";
                     cmd.Parameters.AddWithValue("blogId", blogId);
                     SqlDataReader reader = cmd.ExecuteReader();
 
